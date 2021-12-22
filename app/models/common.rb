@@ -1,0 +1,2 @@
+class Common < ApplicationRecord
+end

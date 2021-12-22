@@ -1,0 +1,33 @@
+<h1>予約一覧</h1>
+
+<table border="1">
+  <thead>
+    <tr bgcolor="#CCCCCC">
+      <th>予約日時</th>
+      <th>商品管理番号</th>
+      <th>開始日時</th>
+      <th>終了日時</th>
+      <th>クーポン名称</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @reserves__.each do |reserve| %>
+
+        <tr>
+          <td><%= reserve.created_at %></td>
+          <td><%= reserve.item.itemurl %></td>
+          <td><%= reserve.item.startdate %></td>
+          <td><%= reserve.item.enddate %></td>
+          <td><%= reserve.coupon.name %></td>
+         
+          
+        </tr>
+    <% end %>
+
+  </tbody>
+  </table>
+
+
+

@@ -1,0 +1,70 @@
+
+
+
+<div class="create-link">
+<a href="/csv/new">
+<div class="create-btn">
+クーポン作成
+</div>
+</a>
+</div>
+
+<h1>作成済クーポン一覧</h1>
+
+<table border="1" width="1300px">
+  <tr bgcolor="#CCCCCC">
+    <th colspan="2" width="">
+    クーポン名称
+    </th>
+    <th rowspan="2" width="">
+    獲得URL
+    </th>
+  </tr>
+  <tr bgcolor="#CCCCCC">
+    <th width="50%">
+    期間
+    </th>
+    <th width="10%">
+    値引き額
+    </th>
+  </tr>
+
+
+
+
+<% @coupons.each do |coupon| %>
+<div class="index-item">
+    <tr>
+      <td colspan="2" width="">
+      <%= coupon.xpath('couponName').text %>
+      </td>
+        <td rowspan="2" width="">
+      <%= coupon.xpath('pcGetUrl').text %>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="50%">
+      <%= l DateTime.parse(coupon.xpath('couponStartDate').text) %> ～ <%= l DateTime.parse(coupon.xpath('couponEndDate').text) %>
+      </td>
+      <td width="10%" align="right">
+
+      <%= coupon.xpath('discountFactor').text %>
+      <% discountType = coupon.xpath('discountType').text %>
+      <% if discountType == "1" then %>
+      <%= "円" %>
+      <% elsif discountType == "2" then %>
+      <%= "％" %>
+      <% else %>
+      <%= "" %>
+      <% end %>
+
+      </td>
+    </tr>
+
+<% end %>
+
+</table>
+
+
+</div>

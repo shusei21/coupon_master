@@ -1,0 +1,8 @@
+<h1>API設定</h1>
+
+<%= form_for @token,:url => {:action => :update} do |f| %>
+  <%= f.text_field :service_secret %>
+  <br>
+  <%= f.text_field :license_key %>
+  <%= f.submit %>
+<% end %>

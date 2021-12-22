@@ -1,0 +1,9 @@
+<h1>card#destroy</h1>
+
+<ul>
+  <li>
+    <%# ボタンを作って、押したら"/home/cancel_subscription"にアクセスする %>
+    <%# class: 'btn'でボタン化 %>
+    <%= button_to '月額課金キャンセル', home_cancel_subscription_path, method: :put %>
+  </li>
+</ul>

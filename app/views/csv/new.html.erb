@@ -1,0 +1,7 @@
+
+<h1>クーポン新規作成</h1><br>
+<h2>CSVで作成</h2>
+<%= form_tag("/csv/import", {multipart: true} ) do %>
+   <%= file_field_tag :file %>
+   <%= submit_tag  "CSVアップロード"  %>
+<% end %>

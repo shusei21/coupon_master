@@ -1,0 +1,99 @@
+<h1>以下の条件でクーポンを作成します</h1>
+
+<table border="1">
+  <thead>
+    <tr bgcolor="#CCCCCC">
+      <th rowspan="2">クーポン画像</th>
+      <th>クーポン名称</th>
+      <th>開始日</th>
+      <th>終了日</th>
+      <th>発行枚数</th>
+      <th>商品タイプ</th>
+      <th>割引タイプ</th>
+      <th>割引額</th>
+      <th>利用上限</th>
+      <th>ランク条件</th>
+      <th>併用可否</th>
+      <th>公開設定</th>
+      <th>商品リスト</th>
+      <th>その他条件</th>
+      <th>開始値</th>
+    </tr>
+    <tr  bgcolor="#CCCCCC">
+      <th colspan="14">クーポン説明</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @coupons.each do |coupon| %>
+
+    <tr>
+      <td rowspan="2"><img src="<%= coupon.image %>" width="100" height="100"></td>
+      <td><%= coupon.name %></td>
+      <td><%= coupon.startdate.to_s(:datetime_jp) %></td>
+      <td><%= coupon.enddate.to_s(:datetime_jp) %></td>
+      <td><%= coupon.issuecount %></td>
+      <% if coupon.itemtype == 1 %>
+        <td>単一商品</td>
+        <% elsif coupon.itemtype == 3 %>
+        <td>複数商品</td>
+        <% elsif coupon.itemtype == 4 %>
+        <td>受注</td>
+        <% elsif coupon.itemtype == 5 %>
+        <td>送料無料</td>
+      <% end %>
+      <% if coupon.discounttype == 1 %>
+        <td>定額</td>
+        <% elsif coupon.discounttype == 2 %>
+        <td>定率</td>
+        <% elsif coupon.discounttype == 4 %>
+        <td>送料無料</td>
+      <% end %>
+      <td><%= coupon.discountfactor %></td>
+      <td><%= coupon.maxcount %></td>
+      <% if coupon.rankcond == 0 %>
+        <td>条件なし</td>
+        <% else %> 
+        <% rank_keys = coupon.rankcond.split(" ") %>
+        <% rank_hash = {"1" => "レギュラー", "2" => "シルバー", "3" => "ゴールド", "4" => "プラチナ", "5" => "ダイヤモンド"} %>
+        <td>
+        <% rank_keys.each do |rank_key| %>
+        <%= rank_hash[rank_key] %><br>
+        <% end %>
+        </td>
+        
+      <% end %>
+      <% if coupon.combineflag == 0 %>
+        <td>併用不可</td>
+        <% elsif coupon.combineflag == 1 %>
+        <td>併用可</td>
+      <% end %>
+      <% if coupon.displayflag == 0 %>
+        <td>非公開</td>
+        <% elsif coupon.displayflag == 1 %>
+        <td>公開</td>
+      <% end %>
+      <td><%= coupon.itemurl %></td>
+      <% if coupon.conditiontype == "RS001" %>
+        <td>デバイス指定</td>
+        <% elsif coupon.conditiontype == "RS002" %>
+        <td>販売方法</td>
+        <% elsif coupon.conditiontype == "RS003" %>
+        <td>利用金額</td>
+        <% elsif coupon.conditiontype == "RS004" %>
+        <td>利用個数</td>
+        <% elsif coupon.conditiontype == "RS006" %>
+        <td>特別会員</td>
+      <% end %>
+      <td><%= coupon.startvalue %></td>
+    </tr>
+    <tr>
+      <td colspan="14"><%= coupon.caption %></td>
+    </tr>
+
+<% end %>
+  </tbody>
+  </table>
+
+<%= link_to "登録", "/coupons/create", class: 'btn btn-default',method: :post %>
+
+
