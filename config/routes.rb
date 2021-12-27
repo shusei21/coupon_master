@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'coupons/create' => 'coupons#create'
   get 'token/:id' => 'token#edit'
   post 'token/create' => 'token#create'
+  post 'token/update' => 'token#update'
   patch 'token/update' => 'token#update'
   get 'items/get' => 'items#get'
   post 'items/add_update' => 'items#add_update'
