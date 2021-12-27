@@ -1,7 +1,7 @@
 <h1>API設定</h1>
 
 <%= form_for @token,:url => {:action => :update} do |f| %>
-	<%= f.hidden_field :user_id => current_user.id %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.text_field :service_secret %>
   <br>
   <%= f.text_field :license_key %>
