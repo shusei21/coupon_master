@@ -39,7 +39,7 @@ class TokenController < ApplicationController
 
 	private
 	def token_params
-    params.require(:token).permit(:service_secret, :license_key)
+    params.require(:token).permit(:service_secret, :license_key, :user_id)
 	end
 
 end
