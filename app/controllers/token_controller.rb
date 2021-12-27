@@ -1,6 +1,9 @@
 class TokenController < ApplicationController
 	def edit
 		@token = Token.find_by(user_id: current_user.id)
+		if @token.nil?
+			@token = Token.new
+		end
 
 	end
 
