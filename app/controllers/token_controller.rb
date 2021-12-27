@@ -20,7 +20,7 @@ class TokenController < ApplicationController
 		@token = Token.find_by(user_id: current_user.id)
 		if @token.nil?
 			@token = Token.new
-			if @token.create(token_params)
+			if @token.save(token_params)
 				redirect_to home_show_path, notice: "登録しました"
 			else
 				redirect_to token_edit_path, notice: "登録できませんでした"
