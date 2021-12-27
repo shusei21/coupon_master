@@ -12,7 +12,7 @@ class TokenController < ApplicationController
 		if @token.create(token_params)
 			redirect_to home_show_path, notice: "更新しました"
 		else
-			redirect_to token_edit_path, notice: "更新できませんでした"
+			redirect_to token_update_path, notice: "更新できませんでした"
 		end
 	end
 
@@ -23,14 +23,14 @@ class TokenController < ApplicationController
 			if @token.save
 				redirect_to home_show_path, notice: "登録しました"
 			else
-				redirect_to token_edit_path, notice: "登録できませんでした"
+				redirect_to token_update_path, notice: "登録できませんでした"
 			end
 
 		else
 			if @token.update(token_params)
 				redirect_to home_show_path, notice: "更新しました"
 			else
-				redirect_to token_edit_path, notice: "更新できませんでした"
+				redirect_to token_update_path, notice: "更新できませんでした"
 			end
 
 		
