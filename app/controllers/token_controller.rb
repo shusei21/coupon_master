@@ -8,13 +8,19 @@ class TokenController < ApplicationController
 	end
 
 	def create
+		@token = Token.new
+		if @token.create(token_params)
+			redirect_to home_show_path, notice: "更新しました"
+		else
+			redirect_to token_edit_path, notice: "更新できませんでした"
+		end
 	end
 
 	def update
 		@token = Token.find_by(user_id: current_user.id)
 		@token.update(token_params)
 
-		redirect_to('/token/edit')
+		redirect_to home_show_path, notice: "更新しました"
 	end
 
 	private
