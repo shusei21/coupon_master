@@ -116,9 +116,40 @@ class ItemsController < ApplicationController
 		    @xmldata = xmldata.string
 		    update_response = http.post(update_uri.path, xmldata.string, header)
 		    update_response_body = update_response.body
+
 		    @body = update_response.body
 		    @insert_item.push(update_response_body)
+
+		    response_xml = REXML::Document.new(update_response_body)
+
+
+		    #エラーがあるか確認(エラーがある場合)
+		    unless response_xml.elements["result/itemUpdateResult/code"].text = "N000"
+		    	error_ids = []
+		    	field_ids = []
+		    	error_messages = []
+		    	response_xml.elements.each("result/itemUpdateResult/errorMessages/errorId") do |errorid|
+		    		error_ids.push(errorid.text)
+		    	end
+		    	response_xml.elements.each("result/itemUpdateResult/errorMessages/fieldId") do |fieldid|
+		    		field_ids.push(fieldid.text)
+		    	end
+		    	response_xml.elements.each("result/itemUpdateResult/errorMessages/msg") do |msg|
+		    		error_messages.push(msg.text)
+		    	end
+
+		    	error_ids.each do |error_id|
+		    		field_ids.each do |field_id|
+		    			error_messages.each do |error_message|
+		    				ItemUpdateError.create(itemurl: reserve.item.itemurl,error_id:error_id,field_id:field_id,error_message:error_message,reserve_id:reserve.id)
+		    			end
+		    		end
+		    	end
+
+		    end
+
 	    end
+	    redirect_to coupons_top_path, notice: "商品ページを更新しました"
 	  else
 	  	redirect_to coupons_top_path, notice: "更新予約中の商品がありません"
 	  end
