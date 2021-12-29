@@ -64,3 +64,6 @@ gem 'roo'
 gem 'attr_encrypted'
 
 gem 'rexml', '~> 3.2', '>= 3.2.4'
+
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'

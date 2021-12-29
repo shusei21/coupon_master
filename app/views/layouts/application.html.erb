@@ -6,63 +6,90 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <nav>
-          <% if user_signed_in? %>
-            <strong><%= link_to current_user.email, home_show_path %></strong>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-            <%# 自分のteamを呼び出す %>
-            <% team = Team.find_by(user_id: current_user.id) %>
-            <%# teamを持っていなかった場合 %>
-            <% if team == nil %>
-              <li>
-                <%# カードを登録して月額課金を初めて開始するリンクを表示する(edit.html.erb) %>
-                <%= link_to 'カード定期決済', card_edit_path %>
-              </li>
-            <% end %>
-
-            <%# teamを持ってた場合 %>
-            <% if team != nil %>
-              <%# サブスクリプションIDがなかった場合 %>
-              <% if team.stripe_subscription_id == nil %>
-                <li>
-                  <%# 月額課金を再開する画面へのリンクを表示(前回作ったteamを使ってサブスクリプションを作成させる)(restart.html.erb) %>
-                  <%= link_to 'カード定期再開', card_restart_path %>
+      <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/home/show">CouponMaster</a>
+        
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+              <% if user_signed_in? %>
+                
+                <li class="nav-item">
+                <%= link_to 'プロフィール変更', edit_user_registration_path , class: 'nav-link active'%>
                 </li>
-              <% end %>
 
-              <%# サブスクリプションIDがあった場合 %>
-              <% if team.stripe_subscription_id != nil %>
-                <li>
-                  <%# 月額課金を終了する画面へのリンクを表示(destroy.html.erb) %>
-                  <%= link_to 'カード定期キャンセル', card_destroy_path %>
+                <li class="nav-item">
+                <%= link_to "API設定", "/token/#{current_user.id}", class: 'nav-link active',method: :get %>
                 </li>
-              <% end %>
+                
+                <%# 自分のteamを呼び出す %>
+                <% team = Team.find_by(user_id: current_user.id) %>
+                <%# teamを持っていなかった場合 %>
+                <% if team == nil %>
+                  <li>
+                    <%# カードを登録して月額課金を初めて開始するリンクを表示する(edit.html.erb) %>
+                    <!--%= link_to 'カード定期決済', card_edit_path %-->
+                  </li>
+                <% end %>
 
+                <%# teamを持ってた場合 %>
+                <% if team != nil %>
+                  <%# サブスクリプションIDがなかった場合 %>
+                  <% if team.stripe_subscription_id == nil %>
+                    <li>
+                      <%# 月額課金を再開する画面へのリンクを表示(前回作ったteamを使ってサブスクリプションを作成させる)(restart.html.erb) %>
+                      <!--%= link_to 'カード定期再開', card_restart_path %-->
+                    </li>
+                  <% end %>
+
+                  <%# サブスクリプションIDがあった場合 %>
+                  <% if team.stripe_subscription_id != nil %>
+                    <li>
+                      <%# 月額課金を終了する画面へのリンクを表示(destroy.html.erb) %>
+                      <!--%= link_to 'カード定期キャンセル', card_destroy_path %-->
+                    </li>
+                  <% end %>
+
+                <% end %>
+          </ul>
+                <%# 最後のリストにログインしているかしていないかを確認できるように表示を作る %>
+          <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <span class="navbar-text">ログイン中【<%= current_user.username %>】</span>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'ログアウト', destroy_user_session_path, class: 'nav-link disable' ,method: :delete %>
+                </li>
+          </ul>
+
+              <% else %>
+                <%= link_to 'サインアップ', new_user_registration_path %>
+                <%= link_to 'ログイン', new_user_session_path %>
+                <%# 最後のリストにログインしているかしていないかを確認できるように表示を作る %>
+                <li>
+                    ログアウト中
+                </li>
+            
             <% end %>
-            <%# 最後のリストにログインしているかしていないかを確認できるように表示を作る %>
-            <li>
-                ログイン中
-            </li>
-
-          <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-            <%# 最後のリストにログインしているかしていないかを確認できるように表示を作る %>
-            <li>
-                ログアウト中
-            </li>
-          <% end %>
+          </div>
+        </div>
       </nav>
     </header>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="notice alert-primary" role="alert">
+      <%= notice %><button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    <!--div class="alert alert-danger" role="alert">
+      <%= alert %><button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div-->
 
 
     <%= yield %>

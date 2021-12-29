@@ -254,6 +254,7 @@ class ItemsController < ApplicationController
 
 		    Reserve.find(reserve.id).delete
 			end
+			redirect_to coupons_top_path, notice: "商品ページを更新しました"
 		else
 			redirect_to coupons_top_path, notice: "更新予約中の商品がありません"
 		end

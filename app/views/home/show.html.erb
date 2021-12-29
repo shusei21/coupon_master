@@ -1,13 +1,17 @@
-<h1>こんにちは、<%= current_user.username %>さん</h1>
-<p>ユーザー用ページです。</p>
 
-<%= link_to "クーポン作成(csv)", "/csv/new", class: 'btn btn-default',method: :get %>
-<%= link_to "クーポン一覧", "/coupons/top", class: 'btn btn-default',method: :get %>
+<h1 class="" style="font-size: 1.5rem;">Main Menu</h1>
+<div class="container-fluid">
+	<p class="fs-2">■クーポン作成</p>
+	<%= link_to "クーポン作成(csv)", "/csv/new", class: 'btn btn-default',method: :get %>
+	<br>
+	<%= link_to "クーポン一覧", "/coupons/top", class: 'btn btn-default',method: :get %>
+</div>
 
-<%= link_to "API設定", "/token/#{@user.id}", class: 'btn btn-default',method: :get %>
-
-<br>
-<%= link_to "バナー設置", "/items/add_update", class: 'btn btn-default',method: :post %>
-<%= link_to "バナー削除", "/items/remove_update", class: 'btn btn-default',method: :post %>
-<br>
-<%= link_to "予約一覧", "/reserves/index", class: 'btn btn-default',method: :get %>
+<div class="container-fluid" style="margin-top: 2rem;">
+	<p class="fs-2">■商品ページ更新</p>
+	<%= link_to "予約一覧", "/reserves/index", class: 'btn btn-default',method: :get %>
+	<br>
+	<%= link_to "バナー設置", "/items/add_update", class: 'btn btn-default',method: :post %>
+	<br>
+	<%= link_to "バナー削除", "/items/remove_update", class: 'btn btn-default',method: :post %>
+</div>
