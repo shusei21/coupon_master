@@ -55,8 +55,8 @@ class ItemsController < ApplicationController
 		    sp_tag_count = html_sp.scan("<!--coupon start-->").length
 
 		    #追加するHTMLを定義
-		    pc_insert_word = "<a href=\"#{reserve.coupon.common_url}\">\n<img src=\"#{reserve.coupon.common_bnr}\">\n</a><br>\n<a href=\"#{reserve.coupon.coupon_url}\">\n<img src=\"https://image.rakuten.co.jp/be-garden/cabinet/campaign/couponget/#{reserve.coupon.coupon_bnr}\">\n</a><br>"
-		    sp_insert_word = "<a href=\"#{reserve.coupon.common_url}\">\n<img src=\"#{reserve.coupon.common_bnr}\" width=\"100%\">\n</a><br>\n<a href=\"#{reserve.coupon.coupon_url}\">\n<img src=\"https://image.rakuten.co.jp/be-garden/cabinet/campaign/couponget/#{reserve.coupon.coupon_bnr}\" width=\"100%\">\n</a><br>"
+		    pc_insert_word = "<a href=\"#{reserve.coupon.common_url}\">\n<img id=\"common-bnr\" src=\"#{reserve.coupon.common_bnr}\">\n</a><br>\n<a href=\"#{reserve.coupon.coupon_url}\">\n<img id=\"coupon-bnr\" src=\"https://image.rakuten.co.jp/be-garden/cabinet/campaign/couponget/#{reserve.coupon.coupon_bnr}\">\n</a><br>"
+		    sp_insert_word = "<a href=\"#{reserve.coupon.common_url}\">\n<img id=\"common-bnr\" src=\"#{reserve.coupon.common_bnr}\" width=\"100%\">\n</a><br>\n<a href=\"#{reserve.coupon.coupon_url}\">\n<img id=\"coupon-bnr\" src=\"https://image.rakuten.co.jp/be-garden/cabinet/campaign/couponget/#{reserve.coupon.coupon_bnr}\" width=\"100%\">\n</a><br>"
 		    #追加するHTMLを定義
 
 		    pc_num = 0

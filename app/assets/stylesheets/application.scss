@@ -14,3 +14,17 @@
  *= require_self
  */
 @import "bootstrap"; 
+
+.wrapper{
+	display: flex;
+	flex-direction: row;
+
+}
+
+.main1{
+	width: 30%;
+}
+
+.main2{
+	width: 70%;
+}
