@@ -147,7 +147,7 @@ class ItemsController < ApplicationController
 		    	end
 
 		    end
-
+		    sleep(1)
 	    end
 	    redirect_to coupons_top_path, notice: "商品ページを更新しました"
 	  else
@@ -253,6 +253,7 @@ class ItemsController < ApplicationController
 		    @insert_item.push(update_response_body)
 
 		    Reserve.find(reserve.id).delete
+		    sleep(1)
 			end
 			redirect_to coupons_top_path, notice: "商品ページを更新しました"
 		else

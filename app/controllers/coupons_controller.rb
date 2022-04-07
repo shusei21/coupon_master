@@ -209,7 +209,7 @@ class CouponsController < ApplicationController
 	 			Reserve.create(item_id:reserve_item.id, user_id:current_user.id)
 	 		end
 		 	end
-
+		 	sleep(1)
     end
 
     @error_cnt = 0
