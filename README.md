@@ -1,9 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+CSVを使って楽天市場で使えるクーポンを複数発行できるプログラムです。【店舗運営者向】
 
 * Ruby version
 
