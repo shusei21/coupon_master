@@ -19,21 +19,3 @@ CSVを使って楽天市場で使えるクーポンを一括発行できるプ�
 
 # ER図
 ![ER](/ER.jpg)
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
